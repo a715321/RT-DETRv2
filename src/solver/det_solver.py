@@ -24,36 +24,36 @@ import wandb,yaml
 with open("configs/rtdetr/include/optimizer.yml") as file:
     cfg = yaml.safe_load(file)
 
-if cfg['names']== None:
-    wandb.init(
-        mode="disabled",
-        # set the wandb project where this run will be logged
-        project="RTDETR_Refactor_NEU",
-        name = cfg['names'],
-        # # track hyperparameters and run metadata
-        config=cfg
-    )
-else:
-    wandb.init(
-        # set the wandb project where this run will be logged
-        project="RTDETR_Refactor_NEU",
-        name = cfg['names'],
-        # # track hyperparameters and run metadata
-        config=cfg
-    )
-def wandb_prefixlogs(loss_dict,train=True):
-    if train:
-        prefix = "train"
-    else:
-        prefix = "valid"
+# if cfg['names']== None:
+#     wandb.init(
+#         mode="disabled",
+#         # set the wandb project where this run will be logged
+#         project="RTDETR_Refactor_NEU",
+#         name = cfg['names'],
+#         # # track hyperparameters and run metadata
+#         config=cfg
+#     )
+# else:
+#     wandb.init(
+#         # set the wandb project where this run will be logged
+#         project="RTDETR_Refactor_NEU",
+#         name = cfg['names'],
+#         # # track hyperparameters and run metadata
+#         config=cfg
+#     )
+# def wandb_prefixlogs(loss_dict,train=True):
+#     if train:
+#         prefix = "train"
+#     else:
+#         prefix = "valid"
     
         
-    for key,value in loss_dict.items():
-        if key == "test_coco_eval_bbox":
-            continue
-        else:
-            logs = {f"{prefix}.{key}":value}
-            wandb.log(logs)
+#     for key,value in loss_dict.items():
+#         if key == "test_coco_eval_bbox":
+#             continue
+#         else:
+#             logs = {f"{prefix}.{key}":value}
+#             wandb.log(logs)
             
 class DetSolver(BaseSolver):
     
@@ -67,14 +67,14 @@ class DetSolver(BaseSolver):
         n_parameters = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
         # wandb.log({"n_parameters":n_parameters})
     
-        wandb.config.n_parameters = n_parameters
+#        wandb.config.n_parameters = n_parameters
  
         logtracker.debug(f"number of params: { n_parameters}")
 
         base_ds = get_coco_api_from_dataset(self.val_dataloader.dataset)
         # best_stat = {'coco_eval_bbox': 0, 'coco_eval_masks': 0, 'epoch': -1, }
         best_stat = {'epoch': -1, }
-        token = "NWBdEgLUPbCLNcs48EaiDBU3jxDIyWBcBwFFDooW3GJ"
+        token = "GL0mJDOUseYzAGXezzJmqYSfxXp4THW8D8ewfY9VGeQ" #line網站申請 notify 密碼
         url = 'https://notify-api.line.me/api/notify'
         headers = {
             'Authorization': 'Bearer ' + token    # 設定權杖
@@ -82,7 +82,7 @@ class DetSolver(BaseSolver):
         with open("configs/rtdetr/include/optimizer.yml", 'r') as file:
             linecfg = yaml.safe_load(file)['names']
             
-        wandb.config.epoches =  args.epoches
+#        wandb.config.epoches =  args.epoches
         try:
             start_time = time.time()
             for epoch in range(self.last_epoch + 1, args.epoches):
@@ -101,7 +101,7 @@ class DetSolver(BaseSolver):
                         ema=self.ema, 
                         scaler=self.scaler
                     )
-                wandb_prefixlogs(loss_dict)
+#                wandb_prefixlogs(loss_dict)
                 self.lr_scheduler.step()
                 
                 if self.output_dir:
@@ -123,7 +123,7 @@ class DetSolver(BaseSolver):
                     self.device, 
                     self.output_dir
                 )
-                wandb_prefixlogs(valid_loss_dict,train=False)
+#                wandb_prefixlogs(valid_loss_dict,train=False)
                 print("test_stats")
                 print(test_stats)
                 logvalidtracker.debug(f"valid test_stats \n{test_stats}")

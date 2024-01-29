@@ -7,8 +7,8 @@ train_dataloader:
   type: DataLoader
   dataset: 
     type: CocoDetection
-    img_folder: /data/lcliu/neudet_coco/train/
-    ann_file: /data/lcliu/neudet_coco/train_annotations.json
+    img_folder: /Users/a715321/data/debug_data/train
+    ann_file: /Users/a715321/data/debug_data/train_annotations.coco.json
     transforms:
       type: Compose
       ops: ~
@@ -22,8 +22,8 @@ val_dataloader:
   type: DataLoader
   dataset: 
     type: CocoDetection
-    img_folder: /data/lcliu/neudet_coco/valid/
-    ann_file: /data/lcliu/neudet_coco/valid_annotations.json
+    img_folder: /Users/a715321/data/debug_data/valid
+    ann_file: /Users/a715321/data/debug_data/train_annotations.coco.json
     transforms:
       type: Compose
       ops: ~ 

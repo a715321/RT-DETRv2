@@ -1,4 +1,4 @@
-names: InceptionSEyolo
+names: 
 test: InceptionSEyolo
 use_ema: True 
 ema:
@@ -9,7 +9,7 @@ ema:
 
 find_unused_parameters: True 
 
-epoches: 150
+epoches: 1
 clip_max_norm: 0.1
 
 optimizer:
