@@ -74,7 +74,7 @@ class DetSolver(BaseSolver):
         base_ds = get_coco_api_from_dataset(self.val_dataloader.dataset)
         # best_stat = {'coco_eval_bbox': 0, 'coco_eval_masks': 0, 'epoch': -1, }
         best_stat = {'epoch': -1, }
-        token = "GL0mJDOUseYzAGXezzJmqYSfxXp4THW8D8ewfY9VGeQ" #line網站申請 notify 密碼
+        token = "tdFVuLvgkDOSEu39ZYbgVM3qGj1PVuSQdtBYhyffUej" #line網站申請 notify 密碼
         url = 'https://notify-api.line.me/api/notify'
         headers = {
             'Authorization': 'Bearer ' + token    # 設定權杖
